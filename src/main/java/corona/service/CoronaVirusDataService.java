@@ -24,7 +24,7 @@ import corona.entity.LocationStat;
  */
 @Service
 public class CoronaVirusDataService {
-	private static String DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv";
+	private static String DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
 	private List<LocationStat> locationStats = new ArrayList<>();
 	
@@ -46,8 +46,8 @@ public class CoronaVirusDataService {
 			LocationStat locationStat = new LocationStat();
 			locationStat.setState(record.get("Province/State"));
 			locationStat.setCountry(record.get("Country/Region"));
-			int lastestCases = Integer.parseInt(record.get(record.size() - 2));
-			int prevFromLastestCases = Integer.parseInt(record.get(record.size() - 3));
+			int lastestCases = Integer.parseInt(record.get(record.size() - 1));
+			int prevFromLastestCases = Integer.parseInt(record.get(record.size() - 2));
 			locationStat.setLastestReportedCases(lastestCases);
 			locationStat.setDifferentFromPreviousDay(lastestCases - prevFromLastestCases);
 			newStats.add(locationStat);
